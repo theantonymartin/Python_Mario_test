@@ -1,6 +1,11 @@
 from ground import Ground
 from mario import Mario
-from blocks import renderBlocks
+
+def returnMap(length, height):
+	grnd = Ground(length, height)
+	grnd.renderBlocks(3*length/8 , height/4)
+	grnd.renderPipe(length/5)
+	return grnd.returnMatrix()
 
 def renderMap(mapMatrix,length,height):
 	map=""
@@ -10,13 +15,18 @@ def renderMap(mapMatrix,length,height):
 			map += '\n'
 	return map
 
-def returnMap(posx, posy, mappos, direction, length, height):
-	grnd = Ground( length, height)
-	grnd.renderGround(mappos)
+def updateMap(posx, posy, mappos, mat, length, height, direction):
+	mapMatrix = []
+	for i in range(0, length):
+		mapMatrix.append([])
+	for x in range(0,length):
+		for y in range(0,height+9):
+			mapMatrix[x].append(mat[mappos+x][y])
 	mrio = Mario(posx, posy)
-
+	'''
 	if mappos >= 2:
-		mapMatrix=renderBlocks(grnd.length-(mappos-2), 7, grnd)
+		mapMatrix=renderBlocks(length-(mappos-2), 7, grnd)
 		grnd.updateMap(mapMatrix)
-	mapMatrix = mrio.renderMario(grnd, direction)
+	'''
+	mapMatrix = mrio.renderMario(height, mapMatrix, direction)
 	return mapMatrix

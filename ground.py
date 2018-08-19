@@ -1,5 +1,5 @@
 class Ground:
-	#generating the ground for the level
+	#generating the ground and stationary objects for the level
 
 	def __init__(self, length, height):
 		self.length = length
@@ -9,9 +9,7 @@ class Ground:
 			self.matrix.append([])
 			for j in range(0,self.height+1):
 				self.matrix[i].append(' ')
-
-	def renderGround(self,time):
-		groundType=time%6;
+		groundType=0
 		for i in range(0, self.length):
 			if groundType == 0:
 				self.matrix[i].extend(( 'W' , '.' , '.' , ' ' , '.', '.', 'x' , 'x' , 'x'))
@@ -29,11 +27,34 @@ class Ground:
 			if groundType == 6:
 				groundType = 0
 
-	def updateMap(self, newmap):
-		self.matrix=newmap
 
-	def renderPersons(self,posx, posy):
-		self.matrix[posx][self.height-posy] = 'M'
+	def renderPipe(self,posx):
+		Pipe=[" __________ ","|XXXXXXXXXX|","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  "]
+		pipeMat=[]
+		
+		for x in range(0,7):
+			pipeMat.append([])
+			for y in range(0,12):
+				pipeMat[x].append(Pipe[x][y])
+
+		for y in range (0, 7):
+			for x in range(0, 12):
+				self.matrix[int(posx+x)][int(self.height-6+y)] = pipeMat[y][x]
+
+	def renderBlocks(self, posx, posy):
+		Blocks=["|WWWW|","|XXXX|","|XXXX|"]
+		blockMat=[]
+
+		for x in range(0,3):
+			blockMat.append([])
+			for y in range(0,6):
+				blockMat[x].append(Blocks[x][y])
+
+		for y in range (0, 3):
+			for x in range(0, 6):
+					self.matrix[int(posx+x)][int(self.height+y-posy)] = blockMat[y][x]
+					
+
 
 	def returnMatrix(self):
 		return self.matrix

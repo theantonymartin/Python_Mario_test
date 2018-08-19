@@ -4,15 +4,14 @@ class Mario :
 		self.y = y
 		self.matrix = [ [ ' ', ' ', '_', '_', ' ', ' '], [ ' ', '|', '_', '_', '|', '_' ], [ ' ', '(', '^', '^', ')', ' ' ], [ '/', '|', 'M', 'M', '|', '\\' ],[ ' ', '|', ' ', ' ', '|', ' ' ], [ '_', '|', '_', '_', '|', ' ' ]]
 	
-	def renderMario(self, grnd, direction):
-		newMatrix = grnd.returnMatrix()
+	def renderMario(self, height, mapMatrix, direction):
 		for y in range(0, 5):
 			for x in range(0, 6):
-				newMatrix[self.x + x][grnd.height-4+y-self.y] = self.matrix[y][x] 
+				mapMatrix[self.x + x][height-4+y-self.y] = self.matrix[y][x] 
 		if direction == '<':
 			for x in range(0, 6):
-				newMatrix[self.x + x][grnd.height-3-self.y] = self.matrix[5][x]
-		return newMatrix
+				mapMatrix[self.x + x][height-3-self.y] = self.matrix[5][x]
+		return mapMatrix
 
 	def showPosition(self):
 		return [ self.x, self.y ]
