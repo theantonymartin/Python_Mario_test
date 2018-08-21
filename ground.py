@@ -28,7 +28,7 @@ class Ground:
 				groundType = 0
 
 
-	def renderPipe(self,posx):
+	def renderPipe(self,posx,posy=6):
 		Pipe=[" __________ ","|XXXXXXXXXX|","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  "]
 		pipeMat=[]
 		
@@ -39,7 +39,7 @@ class Ground:
 
 		for y in range (0, 7):
 			for x in range(0, 12):
-				self.matrix[int(posx+x)][int(self.height-6+y)] = pipeMat[y][x]
+				self.matrix[int(posx+x)][int(self.height-posy+y)] = pipeMat[y][x]
 
 	def renderBlocks(self, posx, posy):
 		Blocks=["|WWWW|","|XXXX|","|XXXX|"]
@@ -53,7 +53,33 @@ class Ground:
 		for y in range (0, 3):
 			for x in range(0, 6):
 					self.matrix[int(posx+x)][int(self.height+y-posy)] = blockMat[y][x]
-					
+
+	def renderClouds(self):
+		Clouds=["  __________             ____________               _________________           ",
+" ///////////\           /////////////\__           //////////////////\          ",
+"/////////////\         /////////////////\          \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\         ",
+"\////////////|        ///////////////////        \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      ",
+" \\\\\\\\\\\\\\\\\\\\\/         |//////////////////         \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      ",
+"                       \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/           \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      ",
+"                                                     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\       ",
+"                                                           \\\\\\\\\\\\\\\\\\\\\\\\\\\        "]				
+		cloudMat=[]
+
+		for x in range(0,8):
+			cloudMat.append([])
+			for y in range(0,len(Clouds[x])):
+				cloudMat[x].append(Clouds[x][y])
+
+		i = 0
+		while(1):
+			length = 80 * i
+			if length>self.length:
+				return
+			for y in range (0, 8):
+				for x in range(0, len(Clouds[y])):
+					if x+length<self.length:
+						self.matrix[x+length][y+1] = cloudMat[y][x]
+			i = i+1
 
 
 	def returnMatrix(self):

@@ -6,10 +6,10 @@ import signal
 
 
 class Get:
-    """Class to get input."""
+    #Class to get input.
 
     def __call__(self):
-        """Defining __call__."""
+        #Defining __call__.
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
         try:
@@ -31,7 +31,7 @@ def alarmHandler(signum, frame):
     raise AlarmException
 
 
-def input_to(getch, timeout=0.1):
+def input_to(getch, timeout=0.09):
     """Taking input from user."""
     signal.signal(signal.SIGALRM, alarmHandler)
     signal.setitimer(signal.ITIMER_REAL, timeout)
