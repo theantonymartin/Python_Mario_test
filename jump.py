@@ -1,18 +1,20 @@
+from colorama import Fore, Back
+
 def Jump(mat, f, posx, posy, height):
 	for x in range(posx, posx+6):
-		if mat[x][height-posy+1] == 'W' or mat[x][height-posy+1] == '|' or mat[x][height-posy+1] == 'X' :
+		if mat[x][height-posy+1] == 'W' or mat[x][height-posy+1] == Fore.GREEN +'W'+ Fore.RESET or mat[x][height-posy+1] == Fore.GREEN +'X'+ Fore.RESET or mat[x][height-posy+1] == '|' or mat[x][height-posy+1] == Fore.GREEN + '|' + Fore.RESET or mat[x][height-posy+1] == 'X' or mat[x][height-posy+1] == Fore.YELLOW + '|' + Fore.RESET or mat[x][height-posy+1] == Fore.YELLOW + 'W' + Fore.RESET or mat[x][height-posy+1] == Fore.YELLOW + 'X' + Fore.RESET:
 			return 'u'
 	return f
 
-def Grav(mat, f, vdist, posx, posy, height):
+def Grav(mat, f, posx, posy, height, objwidth,vdist=0):
 	flag=1
 	#flag1=1
 	if f == 'u':
-		for x in range(posx, posx+6):
-			if mat[x][height-posy-5] == 'X' or mat[x][height-posy-5] == '|':
+		for x in range(posx, posx+objwidth):
+			if mat[x][height-posy-5] == 'X' or mat[x][height-posy-5] == '|' or mat[x][height-posy-5] == Fore.YELLOW + '|' + Fore.RESET or mat[x][height-posy-5] == Fore.YELLOW + 'X' + Fore.RESET:
 				f='d'
-	for x in range(posx, posx+6):
-		if mat[x][height-posy+1] == 'W' or mat[x][height-posy+1] == '|' or mat[x][height-posy+1] == 'X' :
+	for x in range(posx, posx+objwidth):
+		if mat[x][height-posy+1] == Fore.GREEN+'W'+Fore.RESET or mat[x][height-posy+1] == Fore.GREEN+'|'+Fore.RESET or mat[x][height-posy+1] == Fore.GREEN+'X'+Fore.RESET or mat[x][height-posy+1] == 'W' or mat[x][height-posy+1] == '|' or mat[x][height-posy+1] == 'X'  or mat[x][height-posy+1] == Fore.YELLOW + '|' + Fore.RESET or mat[x][height-posy+1] == Fore.YELLOW + 'X' + Fore.RESET or mat[x][height-posy+1] == Fore.YELLOW + 'W' + Fore.RESET :
 			flag = 0
 			if f == 'd' :
 				f='s'

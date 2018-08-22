@@ -1,3 +1,4 @@
+from colorama import Fore, Back,Style
 class Ground:
 	#generating the ground and stationary objects for the level
 
@@ -12,34 +13,79 @@ class Ground:
 		groundType=0
 		for i in range(0, self.length):
 			if groundType == 0:
-				self.matrix[i].extend(( 'W' , '.' , '.' , ' ' , '.', '.', 'x' , 'x' , 'x'))
+				self.matrix[i].extend(( Fore.GREEN + 'W' + Fore.RESET, '.' , '.' , ' ' , '.', '.', 'x' , 'x' , 'x'))
 			elif groundType == 1:
-				self.matrix[i].extend(( 'W' , ' ' , ' ' , '.' , ' ', ' ', '.' , '.' , '.'))
+				self.matrix[i].extend(( Fore.GREEN + 'W' + Fore.RESET, ' ' , ' ' , '.' , ' ', ' ', '.' , '.' , '.'))
 			elif groundType == 2:
-				self.matrix[i].extend(( 'W' , ' ' , '.' , ' ' , '.', '.', 'x' , 'x' , 'x'))
+				self.matrix[i].extend(( Fore.GREEN + 'W' + Fore.RESET, ' ' , '.' , ' ' , '.', '.', 'x' , 'x' , 'x'))
 			elif groundType == 3:
-				self.matrix[i].extend(( 'W' , '.' , ' ' , '.' , ' ', ' ', '.' , '.' , '.'))
+				self.matrix[i].extend(( Fore.GREEN + 'W' + Fore.RESET, '.' , ' ' , '.' , ' ', ' ', '.' , '.' , '.'))
 			elif groundType == 4:
-				self.matrix[i].extend(( 'W' , ' ' , '.' , ' ' , '.', '.', 'x' , 'x' , 'x'))
+				self.matrix[i].extend(( Fore.GREEN + 'W' + Fore.RESET, ' ' , '.' , ' ' , '.', '.', 'x' , 'x' , 'x'))
 			elif groundType == 5:
-				self.matrix[i].extend(( 'W' , ' ' , ' ' , '.' , ' ', ' ', '.' , '.' , '.'))
+				self.matrix[i].extend(( Fore.GREEN + 'W' + Fore.RESET, ' ' , ' ' , '.' , ' ', ' ', '.' , '.' , '.'))
 			groundType = groundType + 1
 			if groundType == 6:
 				groundType = 0
 
 
-	def renderPipe(self,posx,posy=6):
+	def renderHole(self, posx,posy=0):
+		Hole=["          ","          ","          ","          ","          ","          ","LLLLLLLLLL","LLLLLLLLLL",]
+		holeMat=[]
+
+		for x in range(0,8):
+			holeMat.append([])
+			for y in range(0,10):
+				holeMat[x].append(Hole[x][y])
+
+		for y in range (0, 8):
+			for x in range(0, 10):
+				if y==6 or y==7:
+					self.matrix[int(posx+x)][int(self.height-posy+y+1)] = Style.BRIGHT+Fore.RED+holeMat[y][x]+Fore.RESET+Style.RESET_ALL
+				else:
+					self.matrix[int(posx+x)][int(self.height-posy+y+1)] = holeMat[y][x]
+
+	def renderPipe3(self, posx ,posy=9):
+		Pipe=[" __________ ","|XXXXXXXXXX|","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  "]
+		pipeMat=[]
+		
+		for x in range(0,10):
+			pipeMat.append([])
+			for y in range(0,12):
+				pipeMat[x].append(Fore.GREEN+Pipe[x][y]+Fore.RESET)
+
+		for y in range (0, 10):
+			for x in range(0, 12):
+				self.matrix[int(posx+x)][int(self.height-posy+y)] = pipeMat[y][x]
+
+
+	def renderPipe2(self,posx,posy=6):
 		Pipe=[" __________ ","|XXXXXXXXXX|","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  "]
 		pipeMat=[]
 		
 		for x in range(0,7):
 			pipeMat.append([])
 			for y in range(0,12):
-				pipeMat[x].append(Pipe[x][y])
+				pipeMat[x].append(Fore.GREEN+Pipe[x][y]+Fore.RESET)
 
 		for y in range (0, 7):
 			for x in range(0, 12):
 				self.matrix[int(posx+x)][int(self.height-posy+y)] = pipeMat[y][x]
+
+
+	def renderPipe1(self,posx,posy=4):
+		Pipe=[" __________ ","|XXXXXXXXXX|","  |XXXXXX|  ","  |XXXXXX|  ","  |XXXXXX|  "]
+		pipeMat=[]
+		
+		for x in range(0,5):
+			pipeMat.append([])
+			for y in range(0,12):
+				pipeMat[x].append(Fore.GREEN+Pipe[x][y]+Fore.RESET)
+
+		for y in range (0, 5):
+			for x in range(0, 12):
+				self.matrix[int(posx+x)][int(self.height-posy+y)] = pipeMat[y][x]
+		
 
 	def renderBlocks(self, posx, posy):
 		Blocks=["|WWWW|","|XXXX|","|XXXX|"]
@@ -48,7 +94,7 @@ class Ground:
 		for x in range(0,3):
 			blockMat.append([])
 			for y in range(0,6):
-				blockMat[x].append(Blocks[x][y])
+				blockMat[x].append(Fore.YELLOW+Blocks[x][y]+Fore.RESET)
 
 		for y in range (0, 3):
 			for x in range(0, 6):
@@ -58,8 +104,8 @@ class Ground:
 		Clouds=["  __________             ____________               _________________           ",
 " ///////////\           /////////////\__           //////////////////\          ",
 "/////////////\         /////////////////\          \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\         ",
-"\////////////|        ///////////////////        \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      ",
-" \\\\\\\\\\\\\\\\\\\\\/         |//////////////////         \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      ",
+"\/////////////        ///////////////////        \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      ",
+" \\\\\\\\\\\\\\\\\\\\\/         ///////////////////         \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      ",
 "                       \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\/           \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\      ",
 "                                                     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\       ",
 "                                                           \\\\\\\\\\\\\\\\\\\\\\\\\\\        "]				
@@ -68,7 +114,7 @@ class Ground:
 		for x in range(0,8):
 			cloudMat.append([])
 			for y in range(0,len(Clouds[x])):
-				cloudMat[x].append(Clouds[x][y])
+				cloudMat[x].append(Fore.CYAN + Clouds[x][y] + Fore.RESET )
 
 		i = 0
 		while(1):

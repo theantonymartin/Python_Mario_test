@@ -1,8 +1,101 @@
-def placeEnemies(direction1, r,k, enempos,screenlength,maplength):
-	k.append(3*screenlength/8)
-	k.append(screenlength)
-	enempos.append(0)
-	enempos.append(3*maplength/4)
-	for i in range(0,2):
+def placeEnemies(direction1, r,kx,ky, height, enempos,screenlength,maplength,fe):
+	kx.append(7*screenlength/8)
+	kx.append(screenlength)
+	kx.append(screenlength)
+	kx.append(screenlength)
+	kx.append(screenlength)
+	kx.append(screenlength)
+	kx.append(screenlength)
+	kx.append(screenlength)
+	ky.append(height/4+2)
+	ky.append(0)
+	ky.append(0)
+	ky.append(0)
+	ky.append(height/2+2)
+	ky.append(height/2+2)
+	ky.append(0)
+	ky.append(0)
+	enempos.append(75)
+	enempos.append(170)
+	enempos.append(200)
+	enempos.append(220)
+	enempos.append(305)
+	enempos.append(310)
+	enempos.append(385)
+	enempos.append(390)
+	for i in range(0,8):
+		fe.append('s')
 		r.append(0)
 		direction1.append('a')
+ 
+def placeBlocks(grnd, maplength, height):
+ 	grnd.renderBlocks(33.75, height/4)
+ 	grnd.renderBlocks(56.25, height/4)
+ 	grnd.renderBlocks(61.25, height/4)
+ 	grnd.renderBlocks(66.25, height/4)
+ 	grnd.renderBlocks(71.25, height/4)
+ 	grnd.renderBlocks(76.25, height/4)
+ 	grnd.renderBlocks(66.25, height/2)
+ 	grnd.renderBlocks(280, height/4)
+ 	grnd.renderBlocks(285, height/4)
+ 	grnd.renderBlocks(290, height/4)
+ 	grnd.renderBlocks(295, height/2)
+ 	grnd.renderBlocks(300, height/2)
+ 	grnd.renderBlocks(305, height/2)
+ 	grnd.renderBlocks(310, height/2)
+ 	grnd.renderBlocks(315, height/2)
+ 	grnd.renderBlocks(320, height/2)
+ 	grnd.renderBlocks(325, height/2)
+ 	grnd.renderBlocks(340, height/2)
+ 	grnd.renderBlocks(345, height/2)
+ 	grnd.renderBlocks(350, height/2)
+ 	grnd.renderBlocks(355, height/2)
+ 	grnd.renderBlocks(355, height/4)
+ 	grnd.renderBlocks(385, height/4)
+ 	grnd.renderBlocks(390, height/4)
+ 	grnd.renderBlocks(415, height/4)
+ 	grnd.renderBlocks(430, height/4)
+ 	grnd.renderBlocks(430, height/2)
+ 	grnd.renderBlocks(445, height/4)
+ 	grnd.renderBlocks(480, height/4)
+ 	grnd.renderBlocks(490, height/2)
+ 	grnd.renderBlocks(495, height/2)
+ 	grnd.renderBlocks(500, height/2)
+ 	grnd.renderBlocks(520, height/2)
+ 	grnd.renderBlocks(525, height/2)
+ 	grnd.renderBlocks(530, height/2)
+ 	grnd.renderBlocks(535, height/2)
+ 	grnd.renderBlocks(525, height/4)
+ 	grnd.renderBlocks(530, height/4)
+ 	for i in range(0,4):
+ 		for j in range(550+5*i,550+4*5,5):
+ 			grnd.renderBlocks(j, 2+(3*i))
+ 	for i in range(0,4):
+ 		for j in range(580,580+(i+1)*5,5):
+ 			grnd.renderBlocks(j, 11-(3*i))
+ 	for i in range(0,4):
+ 		for j in range(615+5*i,615+5*5,5):
+ 			grnd.renderBlocks(j, 2+(3*i))
+ 	for i in range(0,4):
+ 		for j in range(650,650+(i+1)*5,5):
+ 			grnd.renderBlocks(j, 11-(3*i))
+ 	grnd.renderBlocks(710, height/4)
+ 	grnd.renderBlocks(715, height/4)
+ 	grnd.renderBlocks(720, height/4)
+ 	grnd.renderBlocks(725, height/4)
+ 	for i in range(0,6):
+ 		for j in range(761+5*i,761+6*5,5):
+ 			grnd.renderBlocks(j, 2+(3*i))
+
+def placePipe(grnd, maplength):
+	grnd.renderPipe1(100)
+	grnd.renderPipe2(140)
+	grnd.renderPipe3(180)
+	grnd.renderPipe3(230)
+	grnd.renderPipe1(690)
+	grnd.renderPipe1(750)
+
+def placeHole(grnd,maplength):
+	grnd.renderHole(260)
+	grnd.renderHole(325)
+	grnd.renderHole(641)

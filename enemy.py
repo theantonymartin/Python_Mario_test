@@ -2,7 +2,7 @@ class Enemy1 :
 	def __init__(self, x, y):
 		self.x = x
 		self.y = y
-		self.matrix = [ [ 'V', 'T', 'H', 'T', 'V'], [ '<', 'H', 'H', 'H', '>'], [ ' ', '|', ' ', '|', ' '] ]
+		self.matrix = [ [ 'V', 'T', 'H', 'T', 'V'], [ '<', '<', 'H', '>', '>'], [ ' ', 'l', ' ', 'l', ' '] ]
 	
 	def renderEnemy(self, length, height, mapMatrix, direction):
 		for y in range(0, 3):

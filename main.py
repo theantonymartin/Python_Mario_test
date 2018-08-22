@@ -8,6 +8,7 @@ from input import Get, input_to
 from collision import *
 from init import *
 
+
 getch = Get()
 posx = 1
 posy = 0
@@ -17,22 +18,25 @@ flag1=0
 direction='>'
 direction1=[]
 travlength=0
-mapsize = 2
+mapsize = 9
 screenlength = 90
 height = 35
 f = 's'
 vdist = 0
-k=[]
+fe=[]
+kx=[]
+ky=[]
 enempos=[]
 r=[]
-placeEnemies(direction1, r,k, enempos, screenlength, screenlength*mapsize)
+placeEnemies(direction1, r,kx,ky,height, enempos, screenlength, screenlength*mapsize,fe)
 mat = returnMap(screenlength*mapsize, height)
 z=0
 
 while True:
 
-	r,direction1,k,mapMatrix=updateMap(posx, posy, travlength-posx, mat, screenlength, height, direction,screenlength*mapsize,enempos,k,z,direction1,r)
-	print(renderMap(mapMatrix,screenlength,height))
+	r,direction1,kx,ky,mapMatrix=updateMap(posx, posy, travlength-posx, mat, screenlength, height, direction,screenlength*mapsize,enempos,kx,ky,z,direction1,r,fe)
+	print(renderMap(mapMatrix,screenlength,height)+"hello\n")
+	print(r[0],r[1],r[2],r[3],r[4],len(r))
 	z=0
 	button = input_to(getch)
 	if button == 'q':
@@ -67,7 +71,6 @@ while True:
 		time.sleep(2)
 		sys.exit()
 
-	posy,f,vdist=Grav(mapMatrix, f,vdist,posx, posy, height)
-	#print(vdist)
+	posy,f,vdist=Grav(mapMatrix, f,posx, posy, height, 6,vdist)
 	time.sleep(0.028)
 	system('clear')
