@@ -35,8 +35,7 @@ z=0
 while True:
 
 	r,direction1,kx,ky,mapMatrix=updateMap(posx, posy, travlength-posx, mat, screenlength, height, direction,screenlength*mapsize,enempos,kx,ky,z,direction1,r,fe)
-	print(renderMap(mapMatrix,screenlength,height)+"hello\n")
-	print(r[0],r[1],r[2],r[3],r[4],len(r))
+	print(renderMap(mapMatrix,screenlength,height))
 	z=0
 	button = input_to(getch)
 	if button == 'q':
