@@ -1,20 +1,20 @@
 def placeEnemies(direction1, r,kx,ky, height, enempos,screenlength,maplength,fe):
 	kx.append(7*screenlength/8)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
-	kx.append(screenlength)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
+	kx.append(screenlength-5)
 	ky.append(height/4+2)
 	ky.append(0)
 	ky.append(0)
@@ -111,13 +111,15 @@ def placeBlocks(grnd, maplength, height):
  		for j in range(761+5*i,761+6*5,5):
  			grnd.renderBlocks(j, 2+(3*i))
 
-def placePipe(grnd, maplength):
+def placePipe(grnd, level, maplength):
 	grnd.renderPipe1(100)
 	grnd.renderPipe2(140)
 	grnd.renderPipe3(180)
 	grnd.renderPipe3(230)
 	grnd.renderPipe1(690)
 	grnd.renderPipe1(750)
+	if level==1:
+		grnd.renderFlag(800)
 
 def placeHole(grnd,maplength):
 	grnd.renderHole(260)

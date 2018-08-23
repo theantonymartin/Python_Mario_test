@@ -127,6 +127,49 @@ class Ground:
 						self.matrix[x+length][y+1] = cloudMat[y][x]
 			i = i+1
 
+	def renderFlag(self, posx,posy=29):
+		Flag=["      ___ o",
+"       \  || ",
+"        \ ||",
+"         \||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"          ||",
+"        __||__",
+"       |______|"]
+		
+		FlagMat=[]
+		i=0
+		for x in Flag:
+			FlagMat.append([])
+			for y in x:
+				FlagMat[i].append(Fore.CYAN + y + Fore.RESET )
+			i=i+1
+
+		for y in range (0, i):
+			for x in range(0, len(FlagMat[y])):
+				self.matrix[int(posx+x)][int(self.height-posy+y)] = FlagMat[y][x]
 
 	def returnMatrix(self):
 		return self.matrix

@@ -1,17 +1,20 @@
 from ground import Ground
 from mario import Mario
 from enemy import Enemy1
+from boss import Boss
 from collision import *
 import sys
+from os import system
 from init import *
 from jump import *
+from random import randint
 
-def returnMap(maplength, height):
+def returnMap(maplength, height,level):
 	grnd = Ground(maplength, height)
-	placeBlocks(grnd, maplength, height)
-	placePipe(grnd, maplength)
-	placeHole(grnd,maplength)
 	grnd.renderClouds()
+	placeBlocks(grnd, maplength, height)
+	placePipe(grnd, level, maplength)
+	placeHole(grnd,maplength)
 	return grnd.returnMatrix()
 
 def renderMap(mapMatrix,length,height):
@@ -22,7 +25,7 @@ def renderMap(mapMatrix,length,height):
 			map += '\n'
 	return map
 
-def updateMap(posx, posy, mappos, mat, length, height, direction, maplength,enempos,kx,ky,z, direction1,r,fe):
+def updateMap(boss,level, posx, posy, mappos, mat, length, height, direction, maplength,enempos,kx,ky,z, direction1,r,fe,score,bosspos,direction2):
 	o=[]
 	mapMatrix = []
 	for i in range(0, length):
@@ -48,9 +51,27 @@ def updateMap(posx, posy, mappos, mat, length, height, direction, maplength,enem
 				else:
 					direction1[i]='a'
 			if direction1[i]=='a':
-				kx[i]=kx[i]-0.5-z
+				if level==1:
+					kx[i]=kx[i]-0.5-z
+				else:
+					kx[i]=kx[i]-0.8-z
 			else :
-				kx[i]=kx[i]+0.5-z			
+				if level==1:
+					kx[i]=kx[i]+0.5-z
+				else:
+					kx[i]=kx[i]+0.8-z					
+	if level==2 :
+		if mappos+length>=bosspos:
+			mat=boss.renderBoss(length, height, mapMatrix)
+			if direction2=='a':
+				boss.x=boss.x-1
+			elif direction2 =='d':
+				boss.x=boss.x+1
+			if boss.x == 50:
+				direction2='d'
+			elif boss.x== 85:
+				direction2='a'
+
 	mrio = Mario(posx, posy)
 	#if mappos+posx == int(maplength/2):
 		#renderEnemy(maplength)
@@ -62,8 +83,12 @@ def updateMap(posx, posy, mappos, mat, length, height, direction, maplength,enem
 	mapMatrix = mrio.renderMario(height, mapMatrix, direction)
 	for i in range(0,len(r)):
 		if r[i] == 0 and mappos+length>=enempos[i]:
-			a,b=hitDetectEnemy(mapMatrix,posx,posy,height,6,5)
-			c=fallDetect(mapMatrix,int(kx[i]),int(ky[i]),height,5,maplength)
-			if (a == int(kx[i]) or b== int(kx[i])) or c ==0 :
+			a=hitDetectEnemy(mapMatrix,posx,posy,int(kx[i]),int(ky[i]),height,5,3)
+			if a==1:
+				score=score+20
+			b=fallDetect(mapMatrix,int(kx[i]),int(ky[i]),height,5,maplength)
+			if a == 1 or b ==0 or int(kx[i])<0:
+				#if int(kx[i])+5>=0:
+				system('aplay smb_stomp.wav&')
 				r[i]=1
-	return r,direction1,kx,ky,mapMatrix
+	return score,r,direction1,kx,ky,mapMatrix
